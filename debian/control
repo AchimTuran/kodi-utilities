@@ -1,7 +1,7 @@
 Source: kodiutilities
 Priority: extra
-Maintainer: Arne Morten Kvarving <arne.morten.kvarving@sintef.no>
-Build-Depends: debhelper (>= 8.0.0), cmake, libtinyxml-dev, xbmc-addon-dev
+Maintainer: Sascha Montellese <montellese@kodi.tv>
+Build-Depends: debhelper (>= 8.0.0), cmake, libtinyxml-dev, kodi-addon-dev
 Standards-Version: 3.9.2
 Section: libs
 
@@ -9,12 +9,12 @@ Package: libkodiutilities-dev
 Section: libdevel
 Architecture: any
 Multi-Arch: same
-Depends: libkodiutilities14 (= ${binary:Version}), libtinyxml-dev
+Depends: libkodiutilities15 (= ${binary:Version}), libtinyxml-dev
 Provides: libkodiutilities-dev
 Description: Kodi utilities library -- development files
  Kodi utilities library
 
-Package: libkodiutilities14
+Package: libkodiutilities15
 Section: libs
 Architecture: any
 Multi-Arch: same
