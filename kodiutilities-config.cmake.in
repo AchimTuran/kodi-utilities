@@ -1,0 +1,30 @@
+# - kodiutilities config mode
+#
+# Defines the following variables:
+#  kodiutilities_FOUND        - true
+#  kodiutilities_VERSION      - version of the kodiutilities library found, e.g. 0.2
+#  kodiutilities_INCLUDE_DIRS - header directories with which to compile
+#  kodiutilities_LINKER_FLAGS - flags that must be passed to the linker
+#  kodiutilities_LIBRARIES    - names of the libraries with which to link
+#  kodiutilities_LIBRARY_DIRS - directories in which the libraries are situated
+#
+# propagate these properties from one build system to the other
+set (kodiutilities_VERSION "@kodiutilities_VERSION_MAJOR@.@kodiutilities_VERSION_MINOR@")
+set (kodiutilities_INCLUDE_DIRS @kodiutilities_INCLUDE_DIRS@ @CMAKE_INSTALL_PREFIX@/include)
+set (kodiutilities_LIBRARY_DIRS "@CMAKE_LIBRARY_OUTPUT_DIRECTORY@")
+set (kodiutilities_LINKER_FLAGS "@kodiutilities_LINKER_FLAGS@")
+set (kodiutilities_CONFIG_VARS "@kodiutilities_CONFIG_VARS@")
+
+# libraries come from the build tree where this file was generated
+if(WIN32)
+  set (kodiutilities_LIBRARY "@CMAKE_INSTALL_PREFIX@/@CMAKE_INSTALL_LIBDIR@/kodiutilities.lib")
+else(WIN32)
+  set (kodiutilities_LIBRARY "-L@CMAKE_INSTALL_PREFIX@/@CMAKE_INSTALL_LIBDIR@ -lkodiutilities")
+endif(WIN32)
+set (kodiutilities_LIBRARIES ${kodiutilities_LIBRARY} "@kodiutilities_LIBRARIES@")
+mark_as_advanced (kodiutilities_LIBRARY)
+
+# add the library as a target, so that other things in the project including
+# this file may depend on it and get rebuild if this library changes.
+add_library (kodiutilities UNKNOWN IMPORTED)
+set_property (TARGET kodiutilities PROPERTY IMPORTED_LOCATION "${kodiutilities_LIBRARY}")
